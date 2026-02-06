@@ -3,8 +3,7 @@ split_file.py
 100MBを超えるファイルを100MBに分割するツール
 
 Usage:
-    python split_file.py [filepath]
-    python split_file.py                 (対話式入力)
+    split_file.exe <filepath>
     ファイルをドラッグ＆ドロップ対応
 """
 
@@ -94,13 +93,32 @@ def split_file(filepath):
     return 0
 
 
-def main():
-    # コマンドライン引数またはドラッグ＆ドロップ
-    if len(sys.argv) > 1:
-        filepath = sys.argv[1]
-    else:
-        filepath = input("分割するファイルのパスを入力してください: ").strip().strip('"')
+def print_usage():
+    """使用方法を表示"""
+    print()
+    print("========================================")
+    print("  File Splitter")
+    print("  100MBを超えるファイルを100MBごとに分割")
+    print("========================================")
+    print()
+    print("使用方法:")
+    print("  split_file.exe <filepath>")
+    print()
+    print("  または、ファイルを split_file.exe に")
+    print("  ドラッグ＆ドロップしてください。")
+    print()
+    print("例:")
+    print('  split_file.exe "C:\\LOG\\20260203.LOG"')
+    print()
 
+
+def main():
+    if len(sys.argv) < 2:
+        print_usage()
+        input("終了するには Enter を押してください...")
+        sys.exit(0)
+
+    filepath = sys.argv[1]
     result = split_file(filepath)
 
     input("\n続行するには Enter を押してください...")
